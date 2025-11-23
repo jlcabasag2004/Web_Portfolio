@@ -67,19 +67,17 @@ const Navbar = () => {
     };
 
     return (
+        <>
+        {/* Desktop Navigation - Top Bar */}
         <nav
-        className={`fixed w-full top-0 z-50 transition-all duration-500 ${
-            isOpen
-                ? "bg-[#030014] opacity-100"
-                : scrolled
-                ? "bg-[#030014]/50 backdrop-blur-xl"
-                : "bg-transparent"
-        }`}
-    >
-        <div className="mx-auto px-4 sm:px-6 lg:px-[10%]">
-            <div className="flex items-center justify-center h-16 relative">
-                {/* Desktop Navigation - Centered */}
-                <div className="hidden md:block">
+            className={`hidden md:block fixed w-full top-0 z-50 transition-all duration-500 ${
+                scrolled
+                    ? "bg-[#030014]/50 backdrop-blur-xl"
+                    : "bg-transparent"
+            }`}
+        >
+            <div className="mx-auto px-4 sm:px-6 lg:px-[10%]">
+                <div className="flex items-center justify-center h-16">
                     <div className="flex items-center space-x-8">
                         {navItems.map((item) => (
                             <a
@@ -108,36 +106,13 @@ const Navbar = () => {
                         ))}
                     </div>
                 </div>
-    
-                {/* Mobile Menu Button - Positioned absolutely to the right */}
-                <div className="md:hidden absolute right-4">
-                    <button
-                        onClick={() => setIsOpen(!isOpen)}
-                        className={`relative p-2 text-[#e2d3fd] hover:text-white transition-transform duration-300 ease-in-out transform ${
-                            isOpen ? "rotate-90 scale-125" : "rotate-0 scale-100"
-                        }`}
-                    >
-                        {isOpen ? (
-                            <X className="w-6 h-6" />
-                        ) : (
-                            <Menu className="w-6 h-6" />
-                        )}
-                    </button>
-                </div>
             </div>
-        </div>
-    
-        {/* Mobile Menu - Below Navbar */}
-        <div
-            className={`md:hidden fixed left-0 right-0 bg-[#030014] border-t border-white/10 transition-all duration-300 ease-in-out ${
-                isOpen
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 -translate-y-full pointer-events-none"
-            }`}
-            style={{ top: "64px" }}
-        >
-            <div className="flex items-center justify-around px-2 py-3">
-                {navItems.map((item, index) => {
+        </nav>
+
+        {/* Mobile Bottom Navigation Bar */}
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#030014]/95 backdrop-blur-xl border-t border-white/10">
+            <div className="flex items-center justify-around h-16 px-2">
+                {navItems.map((item) => {
                     const Icon = item.icon;
                     const isActive = activeSection === item.href.substring(1);
                     return (
@@ -145,31 +120,34 @@ const Navbar = () => {
                             key={item.label}
                             href={item.href}
                             onClick={(e) => scrollToSection(e, item.href)}
-                            className={`flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 ease ${
+                            className={`flex flex-col items-center justify-center flex-1 h-full transition-all duration-300 ${
                                 isActive
-                                    ? "bg-gradient-to-br from-[#6366f1]/20 to-[#a855f7]/20 text-[#6366f1] scale-110"
-                                    : "text-[#e2d3fd] hover:text-white hover:bg-white/5"
+                                    ? "text-[#6366f1]"
+                                    : "text-[#e2d3fd]"
                             }`}
-                            style={{
-                                transitionDelay: `${index * 50}ms`,
-                                transform: isOpen 
-                                    ? isActive 
-                                        ? "translateY(0) scale(1.1)" 
-                                        : "translateY(0) scale(1)"
-                                    : "translateY(-20px) scale(0.8)",
-                                opacity: isOpen ? 1 : 0,
-                            }}
-                            title={item.label}
                         >
-                            <Icon className={`w-6 h-6 mb-1 ${isActive ? "text-[#6366f1]" : ""}`} />
-                            <span className="text-[10px] font-medium">{item.label}</span>
+                            <div className={`relative p-2 rounded-lg transition-all duration-300 ${
+                                isActive
+                                    ? "bg-gradient-to-r from-[#6366f1]/20 to-[#a855f7]/20 scale-110"
+                                    : "hover:bg-white/5"
+                            }`}>
+                                <Icon className={`w-5 h-5 transition-all duration-300 ${
+                                    isActive ? "scale-110" : ""
+                                }`} />
+                            </div>
+                            <span className={`text-[10px] mt-0.5 font-medium transition-all duration-300 ${
+                                isActive
+                                    ? "text-[#6366f1] font-semibold"
+                                    : "text-[#9ca3af]"
+                            }`}>
+                                {item.label}
+                            </span>
                         </a>
                     );
                 })}
             </div>
-        </div>
-    </nav>
-    
+        </nav>
+        </>
     );
 };
 
