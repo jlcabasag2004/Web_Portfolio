@@ -51,12 +51,12 @@ try {
     $mail->Host = 'smtp.gmail.com';  // Gmail SMTP server
     $mail->SMTPAuth = true;
     $mail->Username = 'jlcabasag89@gmail.com';  // Your Gmail address
-    $mail->Password = 'your_app_password';  // You'll need to generate an App Password
+    $mail->Password = 'okwn bfpi azmp hjfn';  // You'll need to generate an App Password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
     // Recipients
-    $mail->setFrom('jlcabasag89@gmail.com', 'Portfolio Contact Form');
+    $mail->setFrom('jlcabasag89@gmail.com', 'email-portfolio');
     $mail->addAddress('jlcabasag89@gmail.com', 'JL Cabasag');  // Your email
     $mail->addReplyTo($email, $name);  // Allow reply to sender
 
