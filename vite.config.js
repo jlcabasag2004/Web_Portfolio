@@ -45,17 +45,8 @@ export default defineConfig({
   ],
   build: {
     // Minify and optimize production build
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: false, // Set to true to remove console.log
-        drop_debugger: true,
-        pure_funcs: ['console.info', 'console.debug'] // Remove specific console methods
-      },
-      format: {
-        comments: false // Remove comments
-      }
-    },
+    minify: 'esbuild', // Using esbuild (built into Vite) instead of terser
+    // esbuild is faster and doesn't require additional dependencies
     // Generate source maps (set to false for better protection, but harder to debug)
     sourcemap: false,
     // Increase chunk size warning limit
