@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Home, User, FolderOpen, Calendar, Mail } from "lucide-react";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -7,11 +7,11 @@ const Navbar = () => {
     const [activeSection, setActiveSection] = useState("Home");
     
     const navItems = [
-        { href: "#Home", label: "Home" },
-        { href: "#About", label: "About" },
-        { href: "#Portofolio", label: "Portofolio" },
-        { href: "#Events", label: "Events" },
-        { href: "#Contact", label: "Contact" },
+        { href: "#Home", label: "Home", icon: Home },
+        { href: "#About", label: "About", icon: User },
+        { href: "#Portofolio", label: "Portofolio", icon: FolderOpen },
+        { href: "#Events", label: "Events", icon: Calendar },
+        { href: "#Contact", label: "Contact", icon: Mail },
     ];
 
     useEffect(() => {
@@ -127,37 +127,45 @@ const Navbar = () => {
             </div>
         </div>
     
-        {/* Mobile Menu Overlay */}
+        {/* Mobile Menu - Below Navbar */}
         <div
-            className={`md:hidden fixed inset-0 bg-[#030014] transition-all duration-300 ease-in-out ${
+            className={`md:hidden fixed left-0 right-0 bg-[#030014] border-t border-white/10 transition-all duration-300 ease-in-out ${
                 isOpen
                     ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-[-100%] pointer-events-none"
+                    : "opacity-0 -translate-y-full pointer-events-none"
             }`}
-            style={{ top: "64px", height: "calc(100vh - 64px)" }}
+            style={{ top: "64px" }}
         >
-            <div className="flex flex-col h-full overflow-y-auto">
-                <div className="px-4 py-6 space-y-3 flex-1">
-                    {navItems.map((item, index) => (
+            <div className="flex items-center justify-around px-2 py-3">
+                {navItems.map((item, index) => {
+                    const Icon = item.icon;
+                    const isActive = activeSection === item.href.substring(1);
+                    return (
                         <a
                             key={item.label}
                             href={item.href}
                             onClick={(e) => scrollToSection(e, item.href)}
-                            className={`block px-4 py-3 text-lg font-medium transition-all duration-300 ease rounded-lg ${
-                                activeSection === item.href.substring(1)
-                                    ? "bg-gradient-to-r from-[#6366f1] to-[#a855f7] bg-clip-text text-transparent font-semibold"
+                            className={`flex flex-col items-center justify-center p-3 rounded-xl transition-all duration-300 ease ${
+                                isActive
+                                    ? "bg-gradient-to-br from-[#6366f1]/20 to-[#a855f7]/20 text-[#6366f1] scale-110"
                                     : "text-[#e2d3fd] hover:text-white hover:bg-white/5"
                             }`}
                             style={{
-                                transitionDelay: `${index * 100}ms`,
-                                transform: isOpen ? "translateX(0)" : "translateX(50px)",
+                                transitionDelay: `${index * 50}ms`,
+                                transform: isOpen 
+                                    ? isActive 
+                                        ? "translateY(0) scale(1.1)" 
+                                        : "translateY(0) scale(1)"
+                                    : "translateY(-20px) scale(0.8)",
                                 opacity: isOpen ? 1 : 0,
                             }}
+                            title={item.label}
                         >
-                            {item.label}
+                            <Icon className={`w-6 h-6 mb-1 ${isActive ? "text-[#6366f1]" : ""}`} />
+                            <span className="text-[10px] font-medium">{item.label}</span>
                         </a>
-                    ))}
-                </div>
+                    );
+                })}
             </div>
         </div>
     </nav>

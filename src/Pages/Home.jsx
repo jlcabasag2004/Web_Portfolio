@@ -153,8 +153,8 @@ const Home = () => {
     style: { width: "100%", height: "100%" },
     className: `w-full h-full transition-all duration-500 ${
       isHovering 
-        ? "scale-[100%] sm:scale-[110%] md:scale-[130%] lg:scale-[145%] rotate-2" 
-        : "scale-[95%] sm:scale-[105%] md:scale-[125%] lg:scale-[140%]"
+        ? "scale-[90%] sm:scale-[85%] md:scale-[90%] lg:scale-[95%] rotate-2" 
+        : "scale-[85%] sm:scale-[80%] md:scale-[85%] lg:scale-[90%]"
     }`
   };
 
@@ -209,7 +209,7 @@ const Home = () => {
             </div>
 
             {/* Right Column - Optimized Lottie Animation */}
-            <div className="w-full py-[5%] sm:py-0 lg:w-1/2 h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[750px] relative flex items-center justify-center order-2 lg:order-2 mt-4 sm:mt-8 lg:mt-0 overflow-visible"
+            <div className="w-full py-[5%] sm:py-0 lg:w-1/2 h-[500px] sm:h-[550px] md:h-[600px] lg:h-[650px] xl:h-[750px] relative flex items-center justify-center order-2 lg:order-2 mt-4 sm:mt-8 lg:mt-0 overflow-visible"
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
               data-aos="fade-left"
