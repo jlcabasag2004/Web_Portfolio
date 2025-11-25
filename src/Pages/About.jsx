@@ -216,7 +216,7 @@ const AboutPage = () => {
               data-aos="fade-right"
               data-aos-duration="1500"
             >
-              An Information Technology student and a Web Developer and UI Designer. I focus on creating engaging digital experiences and always strive to provide the best solutions in every project.
+              An Information Technology student, Web Developer, and UI Designer with a passion for Arduino and IoT. I focus on creating engaging digital experiences and always strive to provide the best solutions in every project.
 
             </p>
 

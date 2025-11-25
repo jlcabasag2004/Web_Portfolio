@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, ArrowRight } from 'lucide-react';
+import { ExternalLink, ArrowRight, Volume2, VolumeX } from 'lucide-react';
 
-const CardProject = ({ Img, Title, Description, Link: ProjectLink, id }) => {
+const CardProject = ({ Img, Video, Title, Description, Link: ProjectLink, id }) => {
+  const [isVideoMuted, setIsVideoMuted] = useState(true);
+
   // Handle kasus ketika ProjectLink kosong
   const handleLiveDemo = (e) => {
     if (!ProjectLink) {
@@ -29,11 +31,35 @@ const CardProject = ({ Img, Title, Description, Link: ProjectLink, id }) => {
     
         <div className="relative p-5 z-10">
           <div className="relative overflow-hidden rounded-lg">
-            <img
-              src={Img}
-              alt={Title}
-              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-            />
+            {Video ? (
+              <>
+                <video
+                  src={Video}
+                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                  autoPlay
+                  loop
+                  muted={isVideoMuted}
+                  playsInline
+                  controls={false}
+                />
+                <button
+                  type="button"
+                  onClick={() => setIsVideoMuted(prev => !prev)}
+                  className="absolute top-3 right-3 z-10 p-2 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 text-white transition"
+                  aria-label={isVideoMuted ? "Unmute video" : "Mute video"}
+                >
+                  {isVideoMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                </button>
+              </>
+            ) : (
+              Img && (
+                <img
+                  src={Img}
+                  alt={Title}
+                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                />
+              )
+            )}
           </div>
           
           <div className="mt-4 space-y-3">
@@ -54,7 +80,7 @@ const CardProject = ({ Img, Title, Description, Link: ProjectLink, id }) => {
                   onClick={handleLiveDemo}
                   className="inline-flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors duration-200"
                 >
-                  <span className="text-sm font-medium">Live Demo</span>
+                  <span className="text-sm font-medium">Read More</span>
                   <ExternalLink className="w-4 h-4" />
                 </a>
               ) : (

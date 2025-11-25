@@ -143,9 +143,29 @@ export default function FullWidthTabs() {
         Title: project.title,
         Description: project.description,
         Img: project.img_url,
+        Video: project.video_url,
         Link: project.link,
         TechStack: project.tech_stack ? JSON.parse(project.tech_stack) : [],
       }));
+
+      const manualProjects = [
+        {
+          id: "sia-solar-tracker",
+          Title: "LumenTrack",
+          Description:
+            "A solar tracker that auto-detects the sun's position using paired LDR sensors, rotates via servo motors to stay aligned, and triggers a buzzer when obstacles like tree branches block the light path.",
+          Video: "/Projects/SIA.mp4",
+          Img: "",
+          Link: "https://escr.fwh.is/?i=1",
+          TechStack: ["Arduino", "Servo", "LDR", "Buzzer"],
+          Features: [
+            "Dual LDR sensors continuously sample light intensity to determine the optimal sun-facing angle.",
+            "Microcontroller logic drives a high-torque servo to keep the panel aligned with the brightest point.",
+            "Buzzer alert warns when shadows or objects block sunlight so the array can be cleared quickly.",
+            "Modular frame makes it easy to adapt for small IoT or larger renewable-energy prototypes."
+          ],
+        },
+      ];
 
       const transformedCertificates = certificateData.map((cert) => ({
         Img: cert.img_url,
@@ -173,11 +193,13 @@ export default function FullWidthTabs() {
       // Merge API certificates with Cisco certificates
       const allCertificates = [...ciscoCertificates, ...transformedCertificates];
 
-      setProjects(transformedProjects);
+      const allProjects = [...manualProjects, ...transformedProjects];
+
+      setProjects(allProjects);
       setCertificates(allCertificates);
 
       // Store in localStorage
-      localStorage.setItem("projects", JSON.stringify(transformedProjects));
+      localStorage.setItem("projects", JSON.stringify(allProjects));
       localStorage.setItem("certificates", JSON.stringify(allCertificates));
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -328,6 +350,7 @@ export default function FullWidthTabs() {
                   >
                     <CardProject
                       Img={project.Img}
+                      Video={project.Video}
                       Title={project.Title}
                       Description={project.Description}
                       Link={project.Link}

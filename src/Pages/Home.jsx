@@ -20,8 +20,8 @@ const StatusBadge = memo(() => (
 ));
 
 const MainTitle = memo(() => (
-  <div className="space-y-2" data-aos="fade-up" data-aos-delay="600">
-    <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl font-bold tracking-tight">
+  <div className="space-y-1" data-aos="fade-up" data-aos-delay="600">
+    <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-tight">
       <span className="relative inline-block">
         <span className="absolute -inset-2 bg-gradient-to-r from-[#6366f1] to-[#a855f7] blur-2xl opacity-20"></span>
         <span className="relative bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
@@ -29,10 +29,17 @@ const MainTitle = memo(() => (
         </span>
       </span>
       <br />
-      <span className="relative inline-block mt-2">
+      <span className="relative inline-block mt-1">
         <span className="absolute -inset-2 bg-gradient-to-r from-[#6366f1] to-[#a855f7] blur-2xl opacity-20"></span>
         <span className="relative bg-gradient-to-r from-[#6366f1] to-[#a855f7] bg-clip-text text-transparent">
           Developer
+        </span>
+      </span>
+      <br />
+      <span className="relative inline-block mt-1">
+        <span className="absolute -inset-2 bg-gradient-to-r from-[#6366f1] to-[#a855f7] blur-2xl opacity-20"></span>
+        <span className="relative bg-gradient-to-r from-[#6366f1] to-[#a855f7] bg-clip-text text-transparent">
+          & IoT Enthusiast
         </span>
       </span>
     </h1>
@@ -74,10 +81,10 @@ const SocialLink = memo(({ icon: Icon, link }) => (
 ));
 
 // Constants
-const TYPING_SPEED = 100;
-const ERASING_SPEED = 50;
-const PAUSE_DURATION = 2000;
-const WORDS = ["Information Technology Student", "UI Designer", "Web Developer"];
+const TYPING_SPEED = 55;
+const ERASING_SPEED = 35;
+const PAUSE_DURATION = 800;
+const WORDS = ["Information Technology Student", "UI Designer", "Web Developer", "IoT Enthusiast"];
 const TECH_STACK = ["HTML", "CSS", "PHP", "JavaScript", "React", "Node.js", "Laravel", "SweetAlert2"];
 const SOCIAL_LINKS = [
   { icon: Github, link: "https://github.com/jlcabasag2004" },
@@ -167,7 +174,7 @@ const Home = () => {
             <div className="w-full lg:w-1/2 space-y-6 sm:space-y-8 text-left lg:text-left order-1 lg:order-1 lg:mt-0"
               data-aos="fade-right"
               data-aos-delay="200">
-              <div className="space-y-4 sm:space-y-6">
+              <div className="space-y-3 sm:space-y-4">
                 <StatusBadge />
                 <MainTitle />
 
@@ -183,7 +190,7 @@ const Home = () => {
                 <p className="text-base md:text-lg text-gray-400 max-w-xl leading-relaxed font-light"
                   data-aos="fade-up"
                   data-aos-delay="1000">
-                  Creating an Innovative, Functional, and User-Friendly Website for Digital Solutions.
+                  Creating innovative web solutions and exploring Arduino & IoT projects for digital transformation.
                 </p>
 
                 {/* Tech Stack */}
