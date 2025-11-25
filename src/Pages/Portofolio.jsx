@@ -154,7 +154,7 @@ export default function FullWidthTabs() {
           Title: "LumenTrack",
           Description:
             "A solar tracker that auto-detects the sun's position using paired LDR sensors, rotates via servo motors to stay aligned, and triggers a buzzer when obstacles like tree branches block the light path.",
-          Video: "/Projects/SIA.mp4",
+          Video: "https://youtu.be/mvG1E3vGT-A",
           Img: "",
           Link: "https://escr.fwh.is/?i=1",
           Github: "https://github.com/jlcabasag2004/LumenTrack-Code",

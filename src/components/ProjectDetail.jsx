@@ -5,6 +5,7 @@ import {
   ChevronRight, Layers, Layout, Globe, Package, Cpu, Code,
 } from "lucide-react";
 import Swal from 'sweetalert2';
+import { getYouTubeEmbedMeta } from "../utils/media";
 
 const TECH_ICONS = {
   React: Globe,
@@ -127,6 +128,8 @@ const ProjectDetails = () => {
     );
   }
 
+  const videoMeta = project.Video ? getYouTubeEmbedMeta(project.Video) : null;
+
   return (
     <div className="min-h-screen bg-[#030014] px-[2%] sm:px-0 relative overflow-hidden">
       {/* Background animations remain unchanged */}
@@ -228,20 +231,31 @@ const ProjectDetails = () => {
 
             <div className="space-y-6 md:space-y-10 animate-slideInRight">
               <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl group">
-              
                 <div className="absolute inset-0 bg-gradient-to-t from-[#030014] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 {project.Video ? (
-                  <div className="relative rounded-2xl overflow-hidden">
-                    <video
-                      src={project.Video}
-                      className="w-full h-full object-cover transform transition-transform duration-700 will-change-transform group-hover:scale-105"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      controls
-                    />
-                  </div>
+                  videoMeta ? (
+                    <div className="relative rounded-2xl overflow-hidden pt-[56.25%] bg-black/30">
+                      <iframe
+                        src={`${videoMeta.embedUrl}?rel=0&modestbranding=1`}
+                        className="absolute inset-0 w-full h-full"
+                        title={`${project.Title} video`}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      />
+                    </div>
+                  ) : (
+                    <div className="relative rounded-2xl overflow-hidden">
+                      <video
+                        src={project.Video}
+                        className="w-full h-full object-cover transform transition-transform duration-700 will-change-transform group-hover:scale-105"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        controls
+                      />
+                    </div>
+                  )
                 ) : (
                   project.Img && (
                     <img

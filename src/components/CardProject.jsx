@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ExternalLink, ArrowRight, Volume2, VolumeX } from 'lucide-react';
+import { getYouTubeEmbedMeta } from '../utils/media';
 
 const CardProject = ({ Img, Video, Title, Description, Link: ProjectLink, id }) => {
   const [isVideoMuted, setIsVideoMuted] = useState(true);
+  const youTubeMeta = getYouTubeEmbedMeta(Video);
+  const youTubeEmbedUrl = youTubeMeta
+    ? `${youTubeMeta.embedUrl}?autoplay=1&mute=1&loop=1&playlist=${youTubeMeta.videoId}&controls=0&rel=0&modestbranding=1`
+    : null;
 
   // Handle kasus ketika ProjectLink kosong
   const handleLiveDemo = (e) => {
@@ -32,25 +37,37 @@ const CardProject = ({ Img, Video, Title, Description, Link: ProjectLink, id }) 
         <div className="relative p-5 z-10">
           <div className="relative overflow-hidden rounded-lg">
             {Video ? (
-              <>
-                <video
-                  src={Video}
-                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                  autoPlay
-                  loop
-                  muted={isVideoMuted}
-                  playsInline
-                  controls={false}
-                />
-                <button
-                  type="button"
-                  onClick={() => setIsVideoMuted(prev => !prev)}
-                  className="absolute top-3 right-3 z-10 p-2 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 text-white transition"
-                  aria-label={isVideoMuted ? "Unmute video" : "Mute video"}
-                >
-                  {isVideoMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                </button>
-              </>
+              youTubeEmbedUrl ? (
+                <div className="relative overflow-hidden pt-[56.25%]">
+                  <iframe
+                    src={youTubeEmbedUrl}
+                    className="absolute inset-0 w-full h-full"
+                    title={`${Title} demo`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
+              ) : (
+                <>
+                  <video
+                    src={Video}
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                    autoPlay
+                    loop
+                    muted={isVideoMuted}
+                    playsInline
+                    controls={false}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setIsVideoMuted(prev => !prev)}
+                    className="absolute top-3 right-3 z-10 p-2 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 text-white transition"
+                    aria-label={isVideoMuted ? "Unmute video" : "Mute video"}
+                  >
+                    {isVideoMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                  </button>
+                </>
+              )
             ) : (
               Img && (
                 <img
