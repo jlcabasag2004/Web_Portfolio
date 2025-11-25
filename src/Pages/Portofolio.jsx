@@ -157,6 +157,7 @@ export default function FullWidthTabs() {
           Video: "/Projects/SIA.mp4",
           Img: "",
           Link: "https://escr.fwh.is/?i=1",
+          Github: "https://github.com/jlcabasag2004/LumenTrack-Code",
           TechStack: ["Arduino", "Servo", "LDR", "Buzzer"],
           Features: [
             "Dual LDR sensors continuously sample light intensity to determine the optimal sun-facing angle.",
