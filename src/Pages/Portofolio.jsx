@@ -175,24 +175,62 @@ export default function FullWidthTabs() {
         FileType: 'image',
       }));
 
-      // Add Cisco Certificates from public folder
+      // Add static certificates from public folder
       const ciscoCertificates = [
         {
-          Img: "/Cisco Certificates/NetworkingDevicesandBasicConfigUpdate.jpg",
+          Img: "/Certificates/NetworkingDevicesandBasicConfigUpdate.jpg",
           Title: "Networking Devices and Basic Configuration",
           Description: "Cisco Networking Certificate",
           FileType: 'image',
         },
         {
-          Img: "/Cisco Certificates/Intro-CyberSec.jpg",
+          Img: "/Certificates/Intro-CyberSec.jpg",
           Title: "Introduction to Cybersecurity",
           Description: "Cisco Cybersecurity Certificate",
           FileType: 'image',
         },
       ];
 
-      // Merge API certificates with Cisco certificates
-      const allCertificates = [...ciscoCertificates, ...transformedCertificates];
+      // Newly added training certificates (Cabasag_Training1–5)
+      const trainingCertificates = [
+        {
+          Img: "/Certificates/Cabasag_Training1.jpg",
+          Title: "Training Certificate 1",
+          Description: "Additional training certificate",
+          FileType: 'image',
+        },
+        {
+          Img: "/Certificates/Cabasag_Training2.jpg",
+          Title: "Training Certificate 2",
+          Description: "Additional training certificate",
+          FileType: 'image',
+        },
+        {
+          Img: "/Certificates/Cabasag_Training3.jpg",
+          Title: "Training Certificate 3",
+          Description: "Additional training certificate",
+          FileType: 'image',
+        },
+        {
+          Img: "/Certificates/Cabasag_Training4.jpg",
+          Title: "Training Certificate 4",
+          Description: "Additional training certificate",
+          FileType: 'image',
+        },
+        {
+          Img: "/Certificates/Cabasag_Training5.jpg",
+          Title: "Training Certificate 5",
+          Description: "Additional training certificate",
+          FileType: 'image',
+        },
+      ];
+
+      // Merge API certificates with static certificates
+      const allCertificates = [
+        ...ciscoCertificates,
+        ...trainingCertificates,
+        ...transformedCertificates,
+      ];
 
       const allProjects = [...manualProjects, ...transformedProjects];
 
