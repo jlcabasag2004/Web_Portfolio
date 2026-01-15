@@ -150,6 +150,25 @@ export default function FullWidthTabs() {
 
       const manualProjects = [
         {
+          id: "tap-in-safe-in",
+          Title: "Tap-In Safe-In",
+          Description:
+            "Automated monitoring systems are increasingly adopted by educational institutions to improve attendance accuracy and student security; in this study, Tap-In, Safe-In, an ESP8266-based RFID system, was developed to send real-time SMS and email notifications to parents when students enter or exit UCCP. The system integrates RFID technology, ESP8266 microcontroller, SIM800L GSM module, PHPMailer, and a MySQL-supported web application, and was designed, developed, and tested following the Waterfall Model to ensure reliable data recording, monitoring, and reporting. Results showed that the system effectively automated attendance monitoring, reduced human error, enhanced school–parent communication, improved student safety, and demonstrated scalability for future enhancements.",
+          Video: "",
+          Img: "/Projects/Tap-In_1.jpg",
+          Images: ["/Projects/Tap-In_1.jpg", "/Projects/Tap-In_2.jpg", "/Projects/Tap-In_3.jpg", "/Projects/Tap-In_4.png"],
+          Link: "",
+          Github: "https://github.com/jlcabasag2004",
+          TechStack: ["ESP8266", "RFID", "SIM800L GSM", "PHP", "MySQL", "PHPMailer"],
+          Features: [
+            "Real-time SMS and email notifications to parents when students enter or exit.",
+            "Automated attendance monitoring with RFID technology integration.",
+            "Reliable data recording, monitoring, and reporting capabilities.",
+            "Enhanced school–parent communication and improved student safety.",
+            "Scalable system architecture for future enhancements."
+          ],
+        },
+        {
           id: "sia-solar-tracker",
           Title: "LumenTrack",
           Description:
@@ -389,6 +408,7 @@ export default function FullWidthTabs() {
                   >
                     <CardProject
                       Img={project.Img}
+                      Images={project.Images}
                       Video={project.Video}
                       Title={project.Title}
                       Description={project.Description}

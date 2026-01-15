@@ -3,12 +3,15 @@ import { Link } from 'react-router-dom';
 import { ExternalLink, ArrowRight, Volume2, VolumeX } from 'lucide-react';
 import { getYouTubeEmbedMeta } from '../utils/media';
 
-const CardProject = ({ Img, Video, Title, Description, Link: ProjectLink, id }) => {
+const CardProject = ({ Img, Images, Video, Title, Description, Link: ProjectLink, id }) => {
   const [isVideoMuted, setIsVideoMuted] = useState(true);
   const youTubeMeta = getYouTubeEmbedMeta(Video);
   const youTubeEmbedUrl = youTubeMeta
     ? `${youTubeMeta.embedUrl}?autoplay=1&mute=1&loop=1&playlist=${youTubeMeta.videoId}&controls=0&rel=0&modestbranding=1`
     : null;
+  
+  // Use Images array if available, otherwise fall back to Img
+  const displayImage = Images && Images.length > 0 ? Images[0] : Img;
 
   // Handle kasus ketika ProjectLink kosong
   const handleLiveDemo = (e) => {
@@ -69,9 +72,9 @@ const CardProject = ({ Img, Video, Title, Description, Link: ProjectLink, id }) 
                 </>
               )
             ) : (
-              Img && (
+              displayImage && (
                 <img
-                  src={Img}
+                  src={displayImage}
                   alt={Title}
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                 />

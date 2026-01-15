@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   ArrowLeft, ExternalLink, Github, Code2, Star,
   ChevronRight, Layers, Layout, Globe, Package, Cpu, Code,
+  ChevronLeft,
 } from "lucide-react";
 import Swal from 'sweetalert2';
 import { getYouTubeEmbedMeta } from "../utils/media";
@@ -100,6 +101,7 @@ const ProjectDetails = () => {
   const navigate = useNavigate();
   const [project, setProject] = useState(null);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -129,6 +131,17 @@ const ProjectDetails = () => {
   }
 
   const videoMeta = project.Video ? getYouTubeEmbedMeta(project.Video) : null;
+  
+  // Support both single image (Img) and multiple images (Images array)
+  const images = project.Images || (project.Img ? [project.Img] : []);
+  
+  const handlePreviousImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+  
+  const handleNextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
 
   return (
     <div className="min-h-screen bg-[#030014] px-[2%] sm:px-0 relative overflow-hidden">
@@ -257,13 +270,48 @@ const ProjectDetails = () => {
                     </div>
                   )
                 ) : (
-                  project.Img && (
-                    <img
-                      src={project.Img}
-                      alt={project.Title}
-                      className="w-full  object-cover transform transition-transform duration-700 will-change-transform group-hover:scale-105"
-                      onLoad={() => setIsImageLoaded(true)}
-                    />
+                  images.length > 0 && (
+                    <div className="relative w-full">
+                      {/* Image Carousel */}
+                      <div className="relative overflow-hidden">
+                        {images.map((img, index) => (
+                          <img
+                            key={index}
+                            src={img}
+                            alt={`${project.Title} - Image ${index + 1}`}
+                            className={`w-full object-cover transform transition-all duration-700 will-change-transform group-hover:scale-105 ${
+                              index === currentImageIndex ? "opacity-100" : "opacity-0 absolute inset-0"
+                            }`}
+                            onLoad={() => setIsImageLoaded(true)}
+                          />
+                        ))}
+                      </div>
+                      
+                      {/* Navigation Arrows - Only show if more than 1 image */}
+                      {images.length > 1 && (
+                        <>
+                          <button
+                            onClick={handlePreviousImage}
+                            className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 text-white transition-all duration-300 z-10 opacity-0 group-hover:opacity-100"
+                            aria-label="Previous image"
+                          >
+                            <ChevronLeft className="w-5 h-5" />
+                          </button>
+                          <button
+                            onClick={handleNextImage}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 text-white transition-all duration-300 z-10 opacity-0 group-hover:opacity-100"
+                            aria-label="Next image"
+                          >
+                            <ChevronRight className="w-5 h-5" />
+                          </button>
+                          
+                          {/* Image Counter */}
+                          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/60 border border-white/20 text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                            {currentImageIndex + 1} / {images.length}
+                          </div>
+                        </>
+                      )}
+                    </div>
                   )
                 )}
                 <div className="absolute inset-0 border-2 border-white/0 group-hover:border-white/10 transition-colors duration-300 rounded-2xl pointer-events-none" />
